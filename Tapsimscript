@@ -1,0 +1,37 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Tapping Simulator Script (by kart#0001)", "Synapse")
+local remotepath = game:GetService("ReplicatedStorage")
+
+local Main = Window:NewTab("Main")
+local Misc = Window:NewTab("Misc")
+local MainSection = Main:NewSection("Main")
+local MiscSection = Misc:NewSection("Misc")
+
+MiscSection:NewButton("Infinite Yield", "Basic command script :)", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+MainSection:NewToggle("AutoClicker", "Automatically clicks without being on the tab!", function(state)
+    if state then
+        getgenv().v1 = true
+        while v1 and task.wait() do
+            remotepath.Events.Tap:FireServer()
+            end
+    else
+        getgenv().v1 = false
+    end
+end)
+
+MainSection:NewToggle("Auto Rebirth", "Rebirths automatically as soon as you can!", function(state)
+    if state then
+        getgenv().v2 = true
+        while v2 and task.wait() do
+            local args = {
+				[1] = 1
+			}
+			remotepath.Events.Rebirth:FireServer(unpack(args))
+            end
+    else
+        getgenv().v2 = false
+    end
+end)
